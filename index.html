@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio — Abshir Rageh</title>
+    <meta name="description" content="Capturing stories through photography. Natural lighting, heavy contrast, and authentic moments.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Playfair+Display+SC:wght@400;700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@600;700&family=Roboto+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .vintage-serif { font-family: 'Cinzel', serif; }
+        .western-display { font-family: 'Roboto Slab', serif; }
+        .vintage-sc { font-family: 'Playfair Display SC', serif; }
+        .project-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        /* Custom CSS for animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(251, 146, 60, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(251, 146, 60, 0.8);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-fadeInDown {
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-glow {
+            animation: glow 2s infinite;
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced hover effects */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        /* Text animations */
+        .text-shimmer {
+            background: linear-gradient(90deg, #1a1a1a 0%, #fb923c 50%, #1a1a1a 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Button animations */
+        .btn-animate {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-animate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-animate:hover::before {
+            left: 100%;
+        }
+
+        /* Loading animation */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Floating animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Typing animation */
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #fb923c;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #fb923c }
+        }
+    </style>
+</head>
+<body class="bg-[#F6E3D3]">
+    <!-- Navigation -->
+    <nav class="top-0 z-50 sticky bg-[#F6E3D3] shadow-sm">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div>
+                        <h1 class="font-bold text-[#111111] text-3xl leading-none tracking-wide vintage-sc">Abshir Rageh</h1>
+                        <p class="mt-1 text-[#333333] text-xs uppercase leading-none tracking-widest vintage-sc">FILM & PHOTOGRAPHY</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#projects" class="text-gray-700 hover:text-gray-900 transition">Projects</a>
+                    <a href="#consultations" class="text-gray-700 hover:text-gray-900 transition">Consultations</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="space-y-1 px-2 pt-2 pb-3">
+                <a href="#projects" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Projects</a>
+                <a href="#consultations" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Consultations</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Grid -->
+    <section id="projects" class="px-4 py-16">
+        <div class="mx-auto max-w-7xl">
+            <h3 class="mb-12 font-bold text-3xl text-center scroll-animate serif">Featured Projects</h3>
+            
+            <div class="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Project cards will be generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultations Section -->
+    <section id="consultations" class="bg-[#6B5B2E] px-4 py-16">
+        <div class="mx-auto max-w-4xl text-center">
+            <h3 class="mb-6 font-bold text-[#E8D4C0] text-3xl serif">You're telling a story everyday.</h3>
+            <p class="mb-8 text-[#E8D4C0]">I'd love to capture it.</p>
+            
+            <!-- Instagram Connect -->
+            <div class="mb-8">
+                <p class="mb-4 text-[#E8D4C0]">Follow my journey on Instagram for daily inspiration</p>
+                <!-- TODO: Replace 'yourusername' with your actual Instagram username -->
+                <a href="https://www.instagram.com/yourusername" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 px-6 py-3 rounded-full text-white hover:scale-105 transition transform">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                        <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/>
+                        <circle cx="18.406" cy="5.594" r="1.44"/>
+                    </svg>
+                    Follow on Instagram
+                </a>
+            </div>
+            
+            <!-- TODO: Replace 'your-form-id' with your actual Formspree form ID from https://formspree.io -->
+            <form id="consultation-form" class="bg-white shadow-lg p-8 rounded-lg" action="https://formspree.io/f/your-form-id" method="POST">
+                <input type="hidden" name="_subject" value="New consultation request">
+                <input type="text" name="hp" style="display:none" tabindex="-1" autocomplete="off">
+                <div class="mb-6">
+                    <input name="name" type="text" placeholder="Your Name" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-full" required>
+                </div>
+                <div class="mb-6">
+                    <input name="email" type="email" placeholder="Your Email" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-full" required>
+                </div>
+                <div class="mb-6">
+                    <input name="project_type" type="text" placeholder="Project Type" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-full">
+                </div>
+                <div class="mb-6">
+                    <textarea name="message" placeholder="Tell me about your project..." rows="4" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"></textarea>
+                </div>
+                <button type="submit" class="hover:bg-[#E8D4C0] px-8 py-3 border-[#E8D4C0] border-2 rounded-lg font-semibold text-[#E8D4C0] hover:text-[#6B5B2E] transition">
+                    BOOK A CONSULTATION
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#6B5B2E] px-4 py-12">
+        <div class="mx-auto max-w-7xl text-center">
+            <h3 class="mb-4 font-bold text-[#E8D4C0] text-2xl serif">Let's Connect</h3>
+            <p class="mb-8 text-[#E8D4C0]">Follow my journey and let's create something amazing together</p>
+            
+            <!-- Social Media Links -->
+            <!-- TODO: Replace 'yourusername' with your actual Instagram username -->
+            <!-- TODO: Replace 'your@email.com' with your actual email address -->
+            <div class="flex justify-center items-center space-x-6 mb-8">
+                <a href="https://www.instagram.com/yourusername" target="_blank" class="group">
+                    <div class="bg-[#E8D4C0] hover:bg-orange-600 p-3 rounded-full hover:scale-110 transition-all duration-300 transform">
+                        <svg class="w-6 h-6 text-[#6B5B2E]" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                            <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/>
+                            <circle cx="18.406" cy="5.594" r="1.44"/>
+                        </svg>
+                    </div>
+                    <p class="mt-2 text-gray-400 group-hover:text-orange-400 text-sm transition">Instagram</p>
+                </a>
+                
+                <a href="mailto:your@email.com" class="group">
+                    <div class="bg-[#E8D4C0] hover:bg-orange-600 p-3 rounded-full hover:scale-110 transition-all duration-300 transform">
+                        <svg class="w-6 h-6 text-[#6B5B2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <p class="mt-2 text-gray-400 group-hover:text-orange-400 text-sm transition">Email</p>
+                </a>
+            </div>
+            
+            <div class="pt-8 border-[#E8D4C0] border-t">
+                <p class="text-[#E8D4C0]">&copy; 2024 Abshir Rageh Photography. All rights reserved.</p>
+                <p class="opacity-80 mt-2 text-[#E8D4C0] text-sm">Capturing stories, one frame at a time</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="hidden z-[9999] fixed inset-0 flex justify-center items-center bg-black bg-opacity-95 p-4">
+        <div class="z-[10000] relative max-w-6xl max-h-[90vh]">
+            <button onclick="closeImageModal()" class="-top-12 right-0 z-[10001] absolute text-white hover:text-gray-300">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img id="modal-image" src="" alt="Project image" class="z-[9999] max-w-full max-h-[90vh] object-contain">
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4">
+        <div class="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="project-title" class="font-bold text-2xl serif"></h3>
+                    <button onclick="closeProject()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="project-content" class="space-y-4">
+                    <!-- Project content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Project data (same as before)
+        const projectData = {
+            stetson: { title: 'Stetson', subtitle: 'One of the most iconic Texas brands there is.', date: '2018', location: 'East Texas', cameras: 'Hasselblad 500 c/m, Leica M6, Fuji GFX100s, Fuji XT-4', description: 'Capturing the classic presence of the iconic Stetson brand through carefully crafted imagery that speaks to tradition and authenticity.', details: 'When you work with humble, hardworking people, you tend to land some cool projects. Thanks to my buddy Kirk Thurmond and the work we had done with a few other brands, I came to work with Stetson! There are some people you love working with, and Kirk is one of those guys. It feels more like hanging out than working, which is exactly what Stetson wanted us to do.', story: 'They wanted us to tell the story of a day in the life of the artist. The cool thing about Stetson is they\'re definitely a cowboy brand but, they have continued to evolve and taken the southern charm we love here in Texas to bigger cities around the U.S. and other countries. I think this video shows that. A modern Texas man, living life in the city, rocking a Stetson. Since then I have been able to partner with them to capture Artists, and Athletes.', images: 8, videos: [{ title: 'Stetson Campaign Video', url: 'https://player.vimeo.com/video/744792656?h=d8ff8c203f' }] },
+            miller: { title: 'Miller High Life x Tie Bar', subtitle: 'Classic American Heritage Collaboration', date: '2019', location: 'Chicago, Illinois', cameras: 'Canon 5D Mark IV, Sony A7III', description: 'A unique brand collaboration bringing together two American classics in a visual celebration of heritage and style.', details: 'This collaboration required balancing the distinct identities of both brands while creating a cohesive visual narrative. The result is a series of images that feel both nostalgic and contemporary.', story: 'Working with these iconic American brands was an incredible experience. We focused on capturing the authentic moments that represent the spirit of both Miller High Life and Tie Bar - quality craftsmanship, timeless style, and genuine American heritage.', images: 6, videos: [] },
+            fender: { title: 'Fender Guitars x Kyser Capos', subtitle: 'Music Industry Craftsmanship', date: '2020', location: 'Nashville, Tennessee', cameras: 'Nikon Z7, Fuji XT-4', description: 'Music industry collaboration capturing the precision and passion behind two beloved guitar accessories.', details: 'Working with these iconic music brands, we focused on the craftsmanship and attention to detail that goes into every product. The lighting emphasizes the textures and materials that make these items special.', story: 'In the heart of Music City, we documented the intersection of tradition and innovation. Every shot was designed to capture the soul of musicianship - the calloused hands, the worn instruments, the passion that drives every note.', images: 5, videos: [] },
+            taylor: { title: 'Taylor Stitch', subtitle: 'Modern Americana Lifestyle', date: '2021', location: 'San Francisco, California', cameras: 'Leica M10, Hasselblad X1D', description: 'Ruggedly retro brand photography that captures the authentic, lived-in aesthetic of modern Americana.', details: 'Taylor Stitch\'s aesthetic is all about authenticity. We created images that feel like they could have been taken decades ago, yet feel completely current. The heavy contrast and natural lighting create a mood that\'s both nostalgic and fresh.', story: 'We spent days capturing the essence of modern American craftsmanship. From the workshop to the city streets, every image tells a story of quality, durability, and timeless style that defines the Taylor Stitch brand.', images: 7, videos: [] },
+            kyser: { title: 'Kyser Capos', subtitle: 'Musical Excellence Engineering', date: '2020', location: 'Mount Vernon, Texas', cameras: 'Sony A7R IV, Canon R5', description: 'Product photography highlighting the precision engineering and musical excellence of Kyser Capos.', details: 'This project required showcasing the technical precision of Kyser products while maintaining the artistic sensibility of music photography. Each image tells a story of craftsmanship and musical passion.', story: 'In the small town where these amazing capos are made, we documented the journey from raw materials to finished product. Every craftsman, every machine, every quality check that goes into creating the perfect capo.', images: 4, videos: [] },
+            shine: { title: 'Project Shine', subtitle: 'Stories of Hope and Resilience', date: '2022', location: 'Various Refugee Camps', cameras: 'Leica Q2, Sony A7S III', description: 'Documentary photography capturing the raw and beautiful emotion of refugees sharing their stories.', details: 'Project Shine was an incredibly meaningful project, working with refugees to document their journeys and hopes. Using natural light and an unobtrusive approach, we captured authentic moments that speak to resilience, hope, and the universal human experience.', story: 'This was more than a photography project - it was a journey into the human spirit. We spent weeks listening to stories, sharing meals, and earning trust. Each photograph represents not just a person, but a story of survival, hope, and the unbreakable human spirit.', images: 8, videos: [] }
+        };
+
+        // Generate project cards
+        const grid = document.querySelector('#projects .grid') || document.querySelector('#projects > div > div');
+        const projectsContainer = document.querySelector('#projects .grid') || document.querySelector('#projects .max-w-7xl > div:nth-child(2)')
+        const projectsGrid = document.querySelector('#projects .grid') || document.querySelector('#projects > div > div');
+        const cardsParent = document.querySelector('#projects .gap-8.grid') || document.querySelector('#projects .max-w-7xl > div > div');
+
+        const parent = document.querySelector('#projects .gap-8.grid') || document.querySelector('#projects div div');
+        // fallback parent
+        const container = parent || document.querySelector('#projects');
+
+        const projectKeys = Object.keys(projectData);
+        const cardsHtml = projectKeys.map(key => {
+            const p = projectData[key];
+            return `
+                <div onclick="openProject('${key}')" class="relative bg-[#F6E3D3] shadow-lg rounded-lg overflow-hidden scroll-animate cursor-pointer project-card card-hover">
+                    <div class="flex justify-center items-center bg-gradient-to-br from-gray-800 to-gray-900 h-64">
+                        <img src="/assets/images/${key}-1.svg" alt="${p.title} thumbnail" loading="lazy" class="max-h-64 object-contain">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="mb-2 font-semibold text-[#111111] text-xl">${p.title}</h4>
+                        <p class="mb-4 text-[#333333]">${p.description}</p>
+                        <div class="flex justify-between items-center">
+                            <button onclick="openProject('${key}')" class="font-semibold text-orange-600 hover:text-orange-700 btn-animate">
+                                View Project →
+                            </button>
+                            <a href="https://www.instagram.com/yourusername" target="_blank" class="text-gray-400 hover:text-orange-600 transition floating" aria-label="View on Instagram">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                                    <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/>
+                                    <circle cx="18.406" cy="5.594" r="1.44"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        const gridParent = document.querySelector('#projects .gap-8.grid');
+        if (gridParent) gridParent.innerHTML = cardsHtml;
+
+        function openProject(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
+
+            document.getElementById('project-title').textContent = project.title;
+            const content = document.getElementById('project-content');
+            content.innerHTML = `
+                <div class="space-y-8">
+                    <div class="text-center">
+                        <h2 class="mb-2 font-bold text-[#111111] text-2xl">${project.subtitle}</h2>
+                        <div class="flex justify-center items-center space-x-6 text-[#333333] text-sm">
+                            <span>${project.date}</span>
+                            <span>•</span>
+                            <span>${project.location}</span>
+                            <span>•</span>
+                            <span>${project.cameras}</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F6E3D3] p-6 rounded-lg">
+                        <h4 class="mb-4 font-semibold text-[#111111] text-lg serif">How It Feels Being On This Project</h4>
+                        <p class="mb-4 text-[#333333] leading-relaxed">
+                            <strong>The Professional Experience:</strong> Every shoot has its own energy, and this one was special. 
+                            Working with ${project.title ? project.title.toLowerCase() : 'this brand'} brought out something unique in the creative process. 
+                            The atmosphere on set was electric - everyone knew we were capturing something authentic.
+                        </p>
+                        <p class="mb-4 text-[#333333] leading-relaxed">
+                            <strong>Behind the Scenes:</strong> This wasn't just another photoshoot. 
+                            ${project.story ? project.story.substring(0, 200) + '...' : 'The collaboration pushed creative boundaries and resulted in work that exceeded expectations.'}
+                        </p>
+                        <p class="text-[#333333] leading-relaxed">
+                            <strong>The Details That Matter:</strong> From the first concept meeting to the final delivery, 
+                            every decision was intentional. We focused on ${project.cameras ? 'capturing authentic moments with ' + project.cameras.split(',')[0] : 'using the right equipment for the right moment'}, 
+                            ensuring each frame told the complete story of ${project.title ? project.title.toLowerCase() : 'the brand'}.
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="text-[#333333] text-lg">${project.description}</p>
+                    </div>
+
+                    ${project.videos && project.videos.length > 0 ? `
+                    <div class="pt-8 border-t">
+                        <h3 class="mb-6 font-semibold text-[#111111] text-xl text-center">Videos</h3>
+                        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                            ${project.videos.map(video => `
+                                <div class="bg-gray-900 rounded-lg aspect-video overflow-hidden">
+                                    <iframe src="${video.url}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${video.title}"></iframe>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="${project.videos && project.videos.length > 0 ? 'border-t pt-8' : ''}">
+                        <h3 class="mb-6 font-semibold text-[#111111] text-xl text-center">Images</h3>
+                        <div class="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                            ${Array.from({length: project.images}, (_, i) => `
+                                <div class="flex justify-center items-center bg-gradient-to-br from-[#E8D4C0] to-[#D4C0A8] hover:opacity-80 rounded-lg aspect-square transition cursor-pointer" onclick="openImageModal('${projectId}', ${i})">
+                                    <img src="/assets/images/${projectId}-${i+1}.svg" loading="lazy" alt="${project.title} image ${i+1}" class="max-w-full max-h-full object-contain">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t">
+                        <h3 class="mb-6 font-semibold text-[#111111] text-xl text-center">Project Details</h3>
+                        <p class="mb-6 text-[#333333]">${project.details}</p>
+                        
+                        <div class="bg-[#F6E3D3] p-6 rounded-lg">
+                            <h4 class="mb-4 font-semibold text-[#111111] text-lg">The Story</h4>
+                            <p class="text-[#333333]">${project.story}</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F6E3D3] p-6 rounded-lg">
+                        <h4 class="mb-4 font-semibold text-[#111111] text-lg">Technical Approach</h4>
+                        <ul class="space-y-1 text-[#333333]">
+                            <li>• Natural lighting techniques</li>
+                            <li>• Heavy contrast for dramatic effect</li>
+                            <li>• Authentic, unposed moments</li>
+                            <li>• Focus on texture and detail</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProject() {
+            const iframes = document.querySelectorAll('#project-modal iframe');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src;
+            });
+            document.getElementById('project-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openImageModal(projectId, imageIndex) {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            // Fixed: Now correctly shows the clicked image instead of always showing image-1
+            modalImage.src = `/assets/images/${projectId}-${imageIndex+1}.svg`;
+            modalImage.alt = `${projectId} image ${imageIndex+1}`;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            document.getElementById('image-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProject();
+            }
+        });
+
+        document.getElementById('image-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (!document.getElementById('image-modal').classList.contains('hidden')) {
+                    closeImageModal();
+                }
+                if (!document.getElementById('project-modal').classList.contains('hidden')) {
+                    closeProject();
+                }
+            }
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions);
+        document.addEventListener('DOMContentLoaded', () => { const scrollElements = document.querySelectorAll('.scroll-animate'); scrollElements.forEach(el => observer.observe(el)); });
+        document.getElementById('consultation-form').addEventListener('submit', function(e) { e.preventDefault(); alert('Thank you for your inquiry! I\'ll get back to you within 24 hours.'); this.reset(); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); document.getElementById('mobile-menu').classList.add('hidden'); } }); });
+    </script>
+</body>
+</html>

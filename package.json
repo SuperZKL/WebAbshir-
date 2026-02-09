@@ -1,0 +1,9 @@
+{
+  "name": "photography-portfolio",
+  "version": "1.0.0",
+  "description": "Static photography portfolio",
+  "scripts": {
+    "start": "npx serve . -l 5000"
+  },
+  "license": "UNLICENSED"
+}
