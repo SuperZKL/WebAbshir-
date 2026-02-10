@@ -2,7 +2,7 @@
 # https://docs.netlify.com/configure-builds/file-based-configuration/
 
 [build]
-  # No build command needed for static site
+  base = ""
   publish = "."
   
 [build.environment]
